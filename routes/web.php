@@ -6,7 +6,8 @@ use App\Http\Controllers\InstructorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $courses = \App\Models\Course::with('instructor')->latest()->take(9)->get();
+    return view('welcome', compact('courses'));
 });
 
 Route::get('/dashboard', function () {
